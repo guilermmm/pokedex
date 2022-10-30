@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { pokeAPI } from '../services/axios'
+import { asyncComponent } from '../util/functions'
 import { Pokemon } from '../util/types'
 
 const getPokemon = async (name: string): Promise<Pokemon> => {
@@ -11,7 +12,7 @@ interface Props {
   name: string
 }
 
-const PokeLink = async ({ name }: Props) => {
+const PokeLink = asyncComponent(async ({ name }: Props) => {
   const pokemon = await getPokemon(name)
   const pokemonName = name.charAt(0).toUpperCase() + name.slice(1)
   const { sprites } = pokemon
@@ -40,6 +41,6 @@ const PokeLink = async ({ name }: Props) => {
       </Link>
     </div>
   )
-}
+})
 
 export default PokeLink
