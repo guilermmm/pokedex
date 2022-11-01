@@ -19,6 +19,13 @@ export interface Pokemon {
       name: string
     }
   }[]
+  past_types: {
+    types: {
+      type: {
+        name: string
+      }
+    }[]
+  }[]
   sprites: {
     front_default: string
     front_shiny: string
@@ -107,6 +114,12 @@ export interface Item {
   }[]
 }
 
+export interface PokemonTypes {
+  results: {
+    name: string
+  }[]
+}
+
 export const typeColor: Record<string, string> = {
   normal: 'bg-gray-300',
   fire: 'bg-red-500',
@@ -127,3 +140,12 @@ export const typeColor: Record<string, string> = {
   steel: 'bg-gray-400',
   fairy: 'bg-pink-200',
 }
+
+export const excludedTypes = [
+  'unknown',
+  'shadow',
+  'fairy',
+  'unknown',
+  'dark',
+  'steel',
+]

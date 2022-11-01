@@ -1,4 +1,4 @@
-import { axios, pokeAPI } from '../../services/axios'
+import { pokeAPI } from '../../services/axios'
 import { asyncComponent, handleNumber, upperFirst } from '../../util/functions'
 import { Item, Machine, Move, PokemonMoves } from '../../util/types'
 

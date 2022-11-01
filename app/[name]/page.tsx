@@ -1,13 +1,8 @@
 import Link from 'next/link'
-import { pokeAPI } from '../../services/axios'
+import { getPokemon, pokeAPI } from '../../services/axios'
 import { upperFirst } from '../../util/functions'
 import { Pokemon, typeColor } from '../../util/types'
 import MovesTables from './MovesTables'
-
-const getPokemon = async (name: string): Promise<Pokemon> => {
-  const { data } = await pokeAPI.get(`pokemon/${name}`)
-  return data
-}
 
 interface Props {
   params: {
@@ -21,7 +16,7 @@ const Page = async ({ params }: Props) => {
   const { moves, sprites, types } = pokemon
   return (
     <div className="flex flex-col items-center justify-center text-white ">
-      <span className="bg-gray-900 p-2">
+      <div className="bg-gray-900 p-2 rounded-md">
         <h1 className=" text-4xl  p-5 font-bold text-center">{name}</h1>
         <div className="flex flex-row flex-wrap gap-4 justify-center">
           <div className=" w-56 h-56 ">
@@ -56,7 +51,7 @@ const Page = async ({ params }: Props) => {
                           'mr-4 rounded-md px-1 ' + typeColor[type.type.name]
                         }
                       >
-                        <Link href={`/types/${type.type.name}`}>
+                        <Link href={`/type/${type.type.name}`}>
                           {upperFirst(type.type.name)}
                         </Link>
                       </span>
@@ -105,7 +100,7 @@ const Page = async ({ params }: Props) => {
                             className="bg-blue-500 rounded-full"
                             style={{
                               height: '15px',
-                              width: `${stat.base_stat}%`,
+                              width: `${(stat.base_stat / 255) * 100}%`,
                             }}
                           />
                         </div>
@@ -120,7 +115,7 @@ const Page = async ({ params }: Props) => {
         <div>
           <MovesTables moves={moves} />
         </div>
-      </span>
+      </div>
     </div>
   )
 }
